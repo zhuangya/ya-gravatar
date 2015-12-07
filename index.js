@@ -1,14 +1,14 @@
 'use strict';
 
-const debug = require('debug')('ya-gravatar')
-const QS = require('qs')
-const md5 = require('md5')
+const debug = require('debug')('ya-gravatar');
+const QS = require('qs');
+const md5 = require('md5');
 
 module.exports = {
   url: (email, options) => {
     debug('#url():', email, options);
     const defaultParams = ['size', 'defaultImage', 'forceDefault', 'rating'];
-    let qs = buildQueryString(options, defaultParams);
+    const qs = buildQueryString(options, defaultParams);
     debug('#url() qs: %s', qs);
 
     return buildUrl(hashEmail(email), qs, {
@@ -35,35 +35,34 @@ module.exports = {
       size: options.size || 80
     });
   }
-}
+};
 
-function hashEmail (email) {
+function hashEmail(email) {
   const MD5_REGEXP = /^[0-9a-f]{32}$/;
   email = email.toString().trim().toLowerCase();
-  let result = email.match(MD5_REGEXP) ? email : md5(email);
+  const result = email.match(MD5_REGEXP) ? email : md5(email);
   debug('#hashEmail(): %s => %s', email, result);
   return result;
 }
 
-function buildQueryString (options, fields) {
-
-  return QS.stringify(Object.keys(options).filter( (key) => {
-    return fields.indexOf(key) > -1;
-  } ).reduce( (qsObj, qsItem) => {
+function buildQueryString(options, fields) {
+  return QS.stringify(Object.keys(options).filter(key =>
+    fields.indexOf(key) > -1
+  ).reduce((qsObj, qsItem) => {
     let key = '';
     let value = '';
 
     switch (qsItem) {
       case 'size':
         key = 's';
-        value = +options[qsItem];
+        value = Number(options[qsItem]);
         break;
       case 'defaultImage':
         key = 'd';
         value = encodeURIComponent(options[qsItem]);
         break;
       case 'forceDefault':
-        if (options[item]) {
+        if (options[qsItem]) {
           key = 'f';
           value = 'y';
         }
@@ -72,17 +71,17 @@ function buildQueryString (options, fields) {
         key = 'r';
         value = options[qsItem];
         break;
+      default:
+        key = '';
+        value = '';
     }
 
     qsObj[key] = value;
-    return qsObj
-
-  }, {}))
-
+    return qsObj;
+  }, {}));
 }
 
-function buildUrl (hash, qs, options) {
-
+function buildUrl(hash, qs, options) {
   let ext = '';
   let type = '';
   let base = '//www.gravatar.com';
@@ -92,11 +91,11 @@ function buildUrl (hash, qs, options) {
   }
 
   if (options.protocol === 'http') {
-    base = 'http://www.gravatar.com'
+    base = 'http://www.gravatar.com';
   }
 
   if (options.protocol === 'https') {
-    base = 'https://secure.gravatar.com'
+    base = 'https://secure.gravatar.com';
   }
 
   if (options.type === 'avatar') {
