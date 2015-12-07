@@ -1,0 +1,31 @@
+{
+  "name": "ya-gravatar",
+  "version": "0.0.1",
+  "description": "yet another gravatar nodejs wrapper",
+  "main": "index.js",
+  "scripts": {
+    "test": "xo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhuangya/ya-gravatar.git"
+  },
+  "keywords": [
+    "gravatar",
+    "api"
+  ],
+  "author": "Ya Zhuang <zhuangya@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhuangya/ya-gravatar/issues"
+  },
+  "homepage": "https://github.com/zhuangya/ya-gravatar#readme",
+  "dependencies": {
+    "debug": "^2.2.0",
+    "md5": "^2.0.0",
+    "qs": "^6.0.1"
+  },
+  "devDependencies": {
+    "xo": "^0.11.2"
+  }
+}
