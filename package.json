@@ -1,11 +1,10 @@
 {
   "name": "ya-gravatar",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "yet another gravatar nodejs wrapper",
   "main": "index.js",
   "scripts": {
-    "test": "xo --env=node --env=mocha --space --esnext && mocha && istanbul cover _mocha",
-    "prepublish": "npm test"
+    "test": "xo --env=node --env=mocha --space --esnext && mocha && istanbul cover _mocha"
   },
   "repository": {
     "type": "git",
