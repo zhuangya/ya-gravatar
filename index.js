@@ -6,6 +6,7 @@ const md5 = require('md5');
 
 module.exports = {
   url: (email, options) => {
+    options = options || {};
     debug('#url():', email, options);
     const defaultParams = ['size', 'defaultImage', 'forceDefault', 'rating'];
     const qs = buildQueryString(options, defaultParams);
@@ -20,6 +21,7 @@ module.exports = {
   },
 
   profileUrl: (email, options) => {
+    options = options || {};
     debug('#profileUrl():', email, options);
     let qs = '';
     if (options.ext === 'qr') {
